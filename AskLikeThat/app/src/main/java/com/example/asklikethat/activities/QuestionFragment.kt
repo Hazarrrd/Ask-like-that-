@@ -20,7 +20,7 @@ class QuestionFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_question, container, false)
         if (arguments != null) {
             question = (arguments as Bundle).getString("question")!!
-            question = question.replace("&quot;", "\"")
+            question = Html.fromHtml(question, Html.FROM_HTML_MODE_LEGACY).toString()
         }
         return view
     }

@@ -1,18 +1,21 @@
 package com.example.asklikethat.activities
 
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import com.example.asklikethat.R
 import kotlinx.android.synthetic.main.fragment_answers.*
 
 class AnswersFragment : Fragment() {
     private lateinit var questionType: String
     private lateinit var answers: ArrayList<String>
+    private var isClicked = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,38 +32,41 @@ class AnswersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val buttons = arrayListOf<Button>(answerAButton, answerBButton)
-
-        when (questionType) {
-            "multiple" -> {
-                val answerCButton = Button(context)
-                val answerDButton = Button(context)
-                secondRow.apply {
-                    addView(answerCButton)
-                    addView(answerDButton)
-                }
-                buttons.apply {
-                    add(answerCButton)
-                    add(answerDButton)
-                }
-                assignAnswersToButtons(buttons)
-                setListeners(buttons)
-            }
-            "boolean" -> {
-                assignAnswersToButtons(buttons)
-                setListeners(buttons)
-            }
-        }
+        val buttons = arrayListOf<Button>(
+            answerAButton,
+            answerBButton,
+            answerCButton,
+            answerDButton
+        )
+        assignAnswersToButtons(buttons)
+        setListeners(buttons)
     }
 
     private fun assignAnswersToButtons(buttons: ArrayList<Button>) {
-        buttons.forEachIndexed { i, button -> button.text = answers[i] }
+        buttons.forEachIndexed { i, button ->
+            button.text = Html.fromHtml(answers[i], Html.FROM_HTML_MODE_LEGACY)
+        }
     }
 
     private fun setListeners(buttons: ArrayList<Button>) {
         buttons.forEach { button -> button.setOnClickListener {
-//            val condition = (activity as SinglePlayerGameActivity).checkAnswer(button.text.toString())
-            Toast.makeText(context, button.text.toString() + " ", Toast.LENGTH_SHORT).show()
+            if(!isClicked) {
+                isClicked = true
+                val answerCorrect = (activity as SinglePlayerGameActivity)
+                    .checkAnswer(button.text.toString())
+
+                button.setBackgroundColor(Color.YELLOW)
+                Handler().postDelayed({
+                    if (answerCorrect) {
+                        button.setBackgroundColor(Color.GREEN)
+                    } else {
+                        button.setBackgroundColor(Color.RED)
+                    }
+                }, 1000)
+                Handler().postDelayed({
+                    (activity as SinglePlayerGameActivity).nextRound()
+                }, 2000)
+            }
         }}
     }
 }

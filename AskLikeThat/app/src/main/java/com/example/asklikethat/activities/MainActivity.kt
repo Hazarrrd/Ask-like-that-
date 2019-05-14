@@ -14,6 +14,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
+
+
 class MainActivity : AppCompatActivity() {
     val singlePlayerRequestCode = 1
 
@@ -41,6 +44,33 @@ class MainActivity : AppCompatActivity() {
                     val body = response.body()!!
                     val intent = Intent(applicationContext, SinglePlayerGameActivity::class.java)
                         .apply { putParcelableArrayListExtra("questions", body.results) }
+
+                    startActivityForResult(intent, singlePlayerRequestCode)
+                    view.isClickable = true
+                }
+            }
+        })
+    }
+
+    fun startRapid(view: View) {
+        (view as Button).isClickable = false
+        val service = TriviaAPIService()
+        val query = Query()
+            .setAmount(200)
+            .setType("multiple")
+        val call = service.getQuestions(query)
+        call.enqueue(object : Callback<TriviaDTO> {
+            override fun onFailure(call: Call<TriviaDTO>, t: Throwable) {
+                Log.wtf("Error", t.message)
+                view.isClickable = true
+            }
+
+            override fun onResponse(call: Call<TriviaDTO>, response: Response<TriviaDTO>) {
+                if (response.isSuccessful) {
+                    val body = response.body()!!
+                    val intent = Intent(applicationContext, RapidGameActivity::class.java)
+                        .apply { putParcelableArrayListExtra("questions", body.results) }
+
                     startActivityForResult(intent, singlePlayerRequestCode)
                     view.isClickable = true
                 }

@@ -17,6 +17,10 @@ class PointCounter {
         playersPoints[player] = playersPoints.getValue(player) + 1
     }
 
+    fun decrementPoints(player: Player) {
+        playersPoints[player] = playersPoints.getValue(player) - 1
+    }
+
     fun getPointsForPlayers(): MutableMap<Player, Int> {
         return playersPoints
     }

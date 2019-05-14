@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Ask Like That</string>
     <string name="TRIVIA_API_URL">https://opentdb.com</string>
-    <string name="end_game_result_text">You answered correctly to %1$d of %2$d questions!</string>
+    <string name="end_normal_game_result_text">Your score is %1$d ! You answered correctly to %2$d , incorrectly to %3$d and skipped %4$d questions!</string>
+    <string name="end_rapid_game_result_text">You answered correctly to %1$d of %2$d questions!</string>
     <string name="end_game_header_text">Congratulations, %1$s</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

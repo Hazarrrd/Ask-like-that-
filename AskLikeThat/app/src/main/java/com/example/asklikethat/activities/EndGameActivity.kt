@@ -14,24 +14,53 @@ class EndGameActivity : AppCompatActivity() {
         val endGameFragment = setEndGameFragment()
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.endGameFragmentContainer, endGameFragment)
+            .replace(R.id.endGameFragmentContainer, endGameFragment!!)
             .commit()
         setContentView(R.layout.activity_end_game)
         endGameButton.setOnClickListener { endGame() }
     }
 
-    private fun setEndGameFragment(): SinglePlayerEndGameFragment {
-        val maxPoints = intent.getIntExtra("maxPoints", 0)
-        val playerPoints = intent.getIntExtra("playerPoints", 0)
-        val playerName = intent.getStringExtra("playerName")
+    private fun setEndGameFragment(): EndGameFragment? {
+        val kindOfGame = intent.getStringExtra("kindOfGame")
+        if(kindOfGame == "normal"){
 
-        val endGameFragment = SinglePlayerEndGameFragment()
-        val endGameData = Bundle().apply {
-            putString("playerName", playerName)
-            putInt("playerPoints", playerPoints)
-            putInt("maxPoints", maxPoints)
+            val maxPoints = intent.getIntExtra("maxPoints", 0)
+            val playerPoints = intent.getIntExtra("playerPoints", 0)
+            val playerName = intent.getStringExtra("playerName")
+
+            val endGameFragment = EndGameFragment()
+            val endGameData = Bundle().apply {
+                putString("playerName", playerName)
+                putInt("playerPoints", playerPoints)
+                putInt("maxPoints", maxPoints)
+                putString("kindOfGame", kindOfGame)
+            }
+
+            return endGameFragment.apply { arguments = endGameData }
+
+        } else if(kindOfGame == "rapid") {
+
+            val skipped = intent.getIntExtra("skipped", 0)
+            val correct = intent.getIntExtra("correct", 0)
+            val failed = intent.getIntExtra("failed", 0)
+            val playerPoints = intent.getIntExtra("playerPoints", 0)
+            val playerName = intent.getStringExtra("playerName")
+
+            val endGameFragment = EndGameFragment()
+            val endGameData = Bundle().apply {
+                putString("playerName", playerName)
+                putString("kindOfGame", kindOfGame)
+                putInt("skipped", skipped)
+                putInt("correct", correct)
+                putInt("failed", failed)
+                putInt("playerPoints", playerPoints)
+            }
+            return endGameFragment.apply { arguments = endGameData }
+
+        } else if(kindOfGame == "multi"){
+
         }
-        return endGameFragment.apply { arguments = endGameData }
+        return null;
     }
 
     override fun onBackPressed() {

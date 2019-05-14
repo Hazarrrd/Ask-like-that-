@@ -4,27 +4,43 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import com.example.asklikethat.Player
 import com.example.asklikethat.PointCounter
 import com.example.asklikethat.Question
 import com.example.asklikethat.R
+import kotlinx.android.synthetic.main.fragment_rapid_things.*
 
-class SinglePlayerGameActivity : AppCompatActivity() {
+
+
+
+
+
+class RapidGameActivity : AppCompatActivity() {
     private var currentQuestionIndex = 0
     private lateinit var questionsList: ArrayList<Question>
     private lateinit var currentQuestion: Question
     private val player = Player("Player")
     private val pointCounter = PointCounter(player)
     private val endGameRequestCode = 123
+    private var failed = 0;
+    private var correct = 0;
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         questionsList = intent.getParcelableArrayListExtra<Question>("questions")
+
+
         startRound()
-        setContentView(R.layout.activity_singleplayer_game)
+        setContentView(R.layout.activity_rapid_game)
+
     }
 
     private fun startRound() {
+       // val fragment = supportFragmentManager.findFragmentById(R.id.fragment)  as RapidThingsFragment
+        //fragment.blockButton()
+       // button.isClickable = true;
         if (currentQuestionIndex < questionsList.size) {
             currentQuestion = questionsList[currentQuestionIndex]
 
@@ -41,24 +57,38 @@ class SinglePlayerGameActivity : AppCompatActivity() {
         }
     }
 
-    private fun handleEndGame() {
+    fun handleEndGame() {
         val quizResult = Intent(applicationContext, EndGameActivity::class.java)
         quizResult.putExtra("playerPoints", pointCounter.getPointsForPlayers()[player])
         quizResult.putExtra("playerName", player.name)
-        quizResult.putExtra("maxPoints", questionsList.size)
-        quizResult.putExtra("kindOfGame", "normal")
+        quizResult.putExtra("kindOfGame", "rapid")
+        quizResult.putExtra("skipped", currentQuestionIndex - failed - correct)
+        quizResult.putExtra("correct", correct)
+        quizResult.putExtra("failed", failed)
         startActivityForResult(quizResult, endGameRequestCode)
     }
 
     fun checkAnswer(answer: String): Boolean {
         val result = currentQuestion.isAnswerCorrect(answer)
+        //val fragment = supportFragmentManager.findFragmentById(R.id.fragment)  as RapidThingsFragment
+       // fragment.unblockButton()
         if (result) {
+            correct ++
+            currentQuestionIndex += 1
             pointCounter.incrementPoints(player)
+        } else {
+            failed ++
+            currentQuestionIndex += 1
+            pointCounter.decrementPoints(player)
         }
         return result
     }
 
     fun nextRound() {
+        startRound()
+    }
+
+    fun skip() {
         currentQuestionIndex += 1
         startRound()
     }
@@ -66,7 +96,7 @@ class SinglePlayerGameActivity : AppCompatActivity() {
     private fun setQuestionFragment(): QuestionFragment {
         val questionData = Bundle().apply {
             putString("question", currentQuestion.question)
-            putString("kindOfGame","normal")
+            putString("kindOfGame","rapid")
         }
         return QuestionFragment().apply { arguments = questionData }
     }
@@ -75,7 +105,7 @@ class SinglePlayerGameActivity : AppCompatActivity() {
         val answersData = Bundle().apply {
             putStringArrayList("answers", currentQuestion.getAllAnswers())
             putString("type", currentQuestion.type)
-            putString("kindOfGame","normal")
+            putString("kindOfGame","rapid")
         }
         return AnswersFragment().apply { arguments = answersData }
     }

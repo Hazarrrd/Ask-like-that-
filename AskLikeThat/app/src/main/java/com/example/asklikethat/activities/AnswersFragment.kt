@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_answers.*
 class AnswersFragment : Fragment() {
     private lateinit var questionType: String
     private lateinit var answers: ArrayList<String>
+    private lateinit var kindOfGame: String
     private var isClicked = false
 
     override fun onCreateView(
@@ -26,6 +27,7 @@ class AnswersFragment : Fragment() {
         if (arguments != null) {
             answers = (arguments as Bundle).getStringArrayList("answers")!!
             questionType = (arguments as Bundle).getString("type")!!
+            kindOfGame = (arguments as Bundle).getString("kindOfGame")!!
         }
         return view
     }
@@ -52,19 +54,46 @@ class AnswersFragment : Fragment() {
         buttons.forEach { button -> button.setOnClickListener {
             if(!isClicked) {
                 isClicked = true
-                val answerCorrect = (activity as SinglePlayerGameActivity)
-                    .checkAnswer(button.text.toString())
+                var answerCorrect : Boolean? = null
+                if(kindOfGame == "normal"){
+                    answerCorrect = (activity as SinglePlayerGameActivity)
+                        .checkAnswer(button.text.toString())
+                } else if(kindOfGame == "rapid") {
+                    answerCorrect = (activity as RapidGameActivity)
+                        .checkAnswer(button.text.toString())
+
+                } else if(kindOfGame == "multi") {
+                    answerCorrect = (activity as SinglePlayerGameActivity)
+                        .checkAnswer(button.text.toString())
+
+                }
+
 
                 button.setBackgroundColor(Color.YELLOW)
                 Handler().postDelayed({
-                    if (answerCorrect) {
+                    if (answerCorrect!!) {
                         button.setBackgroundColor(Color.GREEN)
                     } else {
                         button.setBackgroundColor(Color.RED)
                     }
                 }, 1000)
                 Handler().postDelayed({
-                    (activity as SinglePlayerGameActivity).nextRound()
+                    if(kindOfGame == "normal"){
+                        (activity as SinglePlayerGameActivity).nextRound()
+                    } else if(kindOfGame == "rapid") {
+
+                        try {
+                            (activity as RapidGameActivity).nextRound()
+                        }
+                        catch (e: IllegalStateException) {
+                            // handler
+                        }
+
+
+                    } else if(kindOfGame == "multi") {
+                        (activity as SinglePlayerGameActivity).nextRound()
+
+                    }
                 }, 2000)
             }
         }}

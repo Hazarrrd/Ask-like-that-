@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.fragment_question.*
 
 class QuestionFragment : Fragment() {
     private lateinit var question: String
+    private lateinit var kindOfGame: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,6 +21,7 @@ class QuestionFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_question, container, false)
         if (arguments != null) {
             question = (arguments as Bundle).getString("question")!!
+            kindOfGame = (arguments as Bundle).getString("kindOfGame")!!
             question = Html.fromHtml(question, Html.FROM_HTML_MODE_LEGACY).toString()
         }
         return view

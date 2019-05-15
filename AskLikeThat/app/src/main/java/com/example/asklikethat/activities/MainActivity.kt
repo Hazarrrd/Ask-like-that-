@@ -1,24 +1,22 @@
 package com.example.asklikethat.activities
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
 import com.example.asklikethat.R
-import com.example.asklikethat.RankingActivity
 import com.example.asklikethat.api.Query
 import com.example.asklikethat.api.TriviaAPIService
 import com.example.asklikethat.api.TriviaDTO
 import com.example.asklikethat.datebase.DatabaseHandler
-import com.example.asklikethat.datebase.Record
+import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
-
+import java.io.IOException
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +31,22 @@ class MainActivity : AppCompatActivity() {
 
         dbHandler = DatabaseHandler(this)
 
+        val mp = MediaPlayer.create(this,R.raw.eminem1)
+        mp.isLooping = true
+        mp.start()
 
+        music.setOnClickListener {
+            if (mp.isPlaying) {
+                mp.stop()
+            } else if (!mp.isPlaying) {
+                try {
+                    mp.prepare()
+                    mp.start()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+        }
         //if (success){
           //  val toast = Toast.makeText(this,"Saved Successfully", Toast.LENGTH_LONG).show()
         //}

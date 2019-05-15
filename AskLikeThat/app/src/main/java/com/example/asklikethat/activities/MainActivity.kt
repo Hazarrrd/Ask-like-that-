@@ -6,10 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import com.example.asklikethat.R
+import com.example.asklikethat.RankingActivity
 import com.example.asklikethat.api.Query
 import com.example.asklikethat.api.TriviaAPIService
 import com.example.asklikethat.api.TriviaDTO
+import com.example.asklikethat.datebase.DatabaseHandler
+import com.example.asklikethat.datebase.Record
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,11 +23,20 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     val singlePlayerRequestCode = 1
+    var dbHandler: DatabaseHandler? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
+        dbHandler = DatabaseHandler(this)
+
+
+        //if (success){
+          //  val toast = Toast.makeText(this,"Saved Successfully", Toast.LENGTH_LONG).show()
+        //}
     }
 
     fun startSinglePlayer(view: View) {
@@ -52,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+
     fun startRapid(view: View) {
         (view as Button).isClickable = false
         val service = TriviaAPIService()
@@ -76,5 +90,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    fun showRecords(view: View) {
+        val intent = Intent(applicationContext, RankingActivity::class.java)
+        startActivityForResult(intent, singlePlayerRequestCode)
     }
 }

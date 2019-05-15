@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.asklikethat.R
+import com.example.asklikethat.datebase.DatabaseHandler
+import com.example.asklikethat.datebase.Record
 import kotlinx.android.synthetic.main.fragment_single_player_end_game.*
 
 class EndGameFragment : Fragment() {
@@ -17,6 +19,7 @@ class EndGameFragment : Fragment() {
     private var skipped: Int = 0
     private var correct: Int = 0
     private var failed: Int = 0
+    var dbHandler: DatabaseHandler? = null
 
 
     override fun onCreateView(
@@ -56,13 +59,26 @@ class EndGameFragment : Fragment() {
 
         if(kindOfGame == "rapid"){
 
-            endGameHeader.text = getString(R.string.end_game_header_text, playerName)
-            resultTextView.text = getString(R.string.end_normal_game_result_text, playerPoints, correct,failed,skipped)
+            dbHandler = DatabaseHandler(context!!)
+
+            val record: Record = Record()
+            var position : Int = 0
+            record.player = playerName
+            record.points = playerPoints
+            position = dbHandler!!.addRecord(record)
+
+            if(position == 0 ) {
+                endGameHeader.text = getString(R.string.end_game_header_text, playerName)
+                resultTextView.text = getString(R.string.end_rapid_game_result_text, playerPoints, correct,failed,skipped)
+            } else {
+                endGameHeader.text = getString(R.string.end_game_header_text, playerName)
+                resultTextView.text = getString(R.string.end_rapid_game_result_text_with_record, playerPoints, correct,failed,skipped,position)
+            }
 
         } else if(kindOfGame == "normal") {
 
             endGameHeader.text = getString(R.string.end_game_header_text, playerName)
-            resultTextView.text = getString(R.string.end_rapid_game_result_text, playerPoints, maxPoints)
+            resultTextView.text = getString(R.string.end_normal_game_result_text, playerPoints, maxPoints)
 
         } else if(kindOfGame == "multi"){
 

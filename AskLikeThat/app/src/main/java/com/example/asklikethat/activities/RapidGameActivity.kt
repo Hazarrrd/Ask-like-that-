@@ -25,6 +25,7 @@ class RapidGameActivity : AppCompatActivity() {
     private val endGameRequestCode = 123
     private var failed = 0;
     private var correct = 0;
+    private var block = false;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +42,7 @@ class RapidGameActivity : AppCompatActivity() {
        // val fragment = supportFragmentManager.findFragmentById(R.id.fragment)  as RapidThingsFragment
         //fragment.blockButton()
        // button.isClickable = true;
+        block = false;
         if (currentQuestionIndex < questionsList.size) {
             currentQuestion = questionsList[currentQuestionIndex]
 
@@ -69,6 +71,7 @@ class RapidGameActivity : AppCompatActivity() {
     }
 
     fun checkAnswer(answer: String): Boolean {
+        block = true;
         val result = currentQuestion.isAnswerCorrect(answer)
         //val fragment = supportFragmentManager.findFragmentById(R.id.fragment)  as RapidThingsFragment
        // fragment.unblockButton()
@@ -89,8 +92,10 @@ class RapidGameActivity : AppCompatActivity() {
     }
 
     fun skip() {
-        currentQuestionIndex += 1
-        startRound()
+        if(block == false){
+            currentQuestionIndex += 1
+            startRound()
+        }
     }
 
     private fun setQuestionFragment(): QuestionFragment {

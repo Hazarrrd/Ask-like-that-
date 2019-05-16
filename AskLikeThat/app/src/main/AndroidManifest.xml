@@ -11,6 +11,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-1037581054129545~3594761042"/>
         <activity android:name=".activities.RankingActivity">
         </activity>
         <activity android:name=".activities.EndGameActivity">

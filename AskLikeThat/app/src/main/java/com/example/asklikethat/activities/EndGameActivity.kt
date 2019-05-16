@@ -4,12 +4,31 @@ import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.asklikethat.R
+import com.google.android.gms.ads.*
 import kotlinx.android.synthetic.main.activity_end_game.*
+
 
 class EndGameActivity : AppCompatActivity() {
 
+    private lateinit var mInterstitialAd: InterstitialAd
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        MobileAds.initialize(this, "ca-app-pub-1037581054129545~3594761042")
+
+        mInterstitialAd = InterstitialAd(this)
+        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+        //testowa reklama ca-app-pub-3940256099942544/1033173712
+        // to jest moja reklama ca-app-pub-1037581054129545/1518906824, która nie działa ;__; (podobno czasem na początku nie działają)
+        // to używamy testowej
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
+
+        mInterstitialAd.setAdListener(object : AdListener() {
+            override fun onAdLoaded() {
+                mInterstitialAd.show()
+            }
+        })
 
         val endGameFragment = setEndGameFragment()
         supportFragmentManager

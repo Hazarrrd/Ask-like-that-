@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".activities.AnswersFragment" android:id="@+id/answersButtonGrid"
+             android:layout_gravity="center" android:gravity="center">
+    <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" android:id="@+id/firstRow"
+            android:gravity="center_horizontal">
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/answerAButton"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/answerBButton"/>
+    </TableRow>
+    <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" android:id="@+id/secondRow" android:gravity="center_horizontal">
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/answerCButton"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/answerDButton"/>
+    </TableRow>
+</TableLayout>

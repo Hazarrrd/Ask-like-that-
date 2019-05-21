@@ -1,5 +1,4 @@
 package com.example.asklikethat
-
 class Player(val name: String, private val token: String, var points: Int) {
     constructor(map: Map<String, String>): this(
         map.getValue("name"),

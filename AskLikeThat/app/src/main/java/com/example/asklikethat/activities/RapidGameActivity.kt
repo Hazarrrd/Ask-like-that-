@@ -7,6 +7,8 @@ import com.example.asklikethat.Player
 import com.example.asklikethat.PointCounter
 import com.example.asklikethat.Question
 import com.example.asklikethat.R
+import com.example.asklikethat.login.databaseArchitecture.UserAccount
+import kotlinx.android.synthetic.main.fragment_rapid_things.*
 
 
 class RapidGameActivity : AppCompatActivity() {

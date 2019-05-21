@@ -20,6 +20,15 @@ data class Question(
         parcel.createStringArrayList()!!
     )
 
+    constructor(map: Map<String, Any>) : this(
+        map["category"] as String,
+        map["type"] as String,
+        map["difficulty"] as String,
+        map["question"] as String,
+        map["correct_answer"] as String,
+        map["incorrect_answers"] as ArrayList<String>
+    )
+
     fun getAllAnswers(): ArrayList<String> {
         return arrayListOf(correct_answer).apply { addAll(incorrect_answers) }
     }
@@ -37,6 +46,17 @@ data class Question(
 
     override fun describeContents(): Int {
         return 0
+    }
+
+    fun toMap(): Map<String, Any> {
+        return mapOf<String, Any>(
+            "category" to category,
+            "difficulty" to difficulty,
+            "type" to type,
+            "question" to question,
+            "incorrect_answers" to incorrect_answers,
+            "correct_answer" to correct_answer
+        )
     }
 
     companion object CREATOR : Parcelable.Creator<Question> {

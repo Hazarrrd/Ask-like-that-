@@ -2,6 +2,7 @@ package com.example.asklikethat.activities
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
@@ -22,6 +23,7 @@ import com.example.asklikethat.watchingProfiles
 import kotlinx.android.synthetic.main.activity_login.*
 
 
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -40,6 +42,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        FirebaseInstanceId.getInstance()
+            .instanceId
+            .addOnSuccessListener { result ->
+                run {
+                    val sharedPreferences = getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    println(result.token)
+                    editor.putString("token", result.token)
+                    editor.putString("playerName", "Maciek")
+                    editor.apply()
+                }
+            }
 
         dbHandler = DatabaseHandler(this)
         currentAccount = intent.getSerializableExtra("CURRENT_USER") as UserAccount
@@ -47,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         mp = MediaPlayer.create(this,R.raw.eminem1)
         mp.isLooping = true
-        mp.start()
+//        mp.start()
 
         music.setOnClickListener {
             if (mp.isPlaying) {
@@ -151,6 +165,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    fun startMultiplayer(view: View) {
+        val intent = Intent(applicationContext, BrowseRoomsActivity::class.java)
+        startActivityForResult(intent, 55)
     }
 
     fun showRecords(view: View) {

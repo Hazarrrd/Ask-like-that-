@@ -54,45 +54,34 @@ class AnswersFragment : Fragment() {
         buttons.forEach { button -> button.setOnClickListener {
             if(!isClicked) {
                 isClicked = true
-                var answerCorrect : Boolean? = null
-                if(kindOfGame == "normal"){
-                    answerCorrect = (activity as SinglePlayerGameActivity)
+                val answerCorrect = when (kindOfGame) {
+                    "normal" -> (activity as SinglePlayerGameActivity)
                         .checkAnswer(button.text.toString())
-                } else if(kindOfGame == "rapid") {
-                    answerCorrect = (activity as RapidGameActivity)
+                    "rapid" -> (activity as RapidGameActivity)
                         .checkAnswer(button.text.toString())
-
-                } else if(kindOfGame == "multi") {
-                    answerCorrect = (activity as SinglePlayerGameActivity)
+                    "multi" -> (activity as OneVsOneGameActivity)
                         .checkAnswer(button.text.toString())
-
+                    else -> false
                 }
 
 
                 button.setBackgroundColor(Color.YELLOW)
                 Handler().postDelayed({
-                    if (answerCorrect!!) {
+                    if (answerCorrect) {
                         button.setBackgroundColor(Color.GREEN)
                     } else {
                         button.setBackgroundColor(Color.RED)
                     }
                 }, 1000)
                 Handler().postDelayed({
-                    if(kindOfGame == "normal"){
-                        (activity as SinglePlayerGameActivity).nextRound()
-                    } else if(kindOfGame == "rapid") {
-
-                        try {
+                    when (kindOfGame) {
+                        "normal" -> (activity as SinglePlayerGameActivity).nextRound()
+                        "rapid" -> try {
                             (activity as RapidGameActivity).nextRound()
-                        }
-                        catch (e: IllegalStateException) {
+                        } catch (e: IllegalStateException) {
                             // handler
                         }
-
-
-                    } else if(kindOfGame == "multi") {
-                        (activity as SinglePlayerGameActivity).nextRound()
-
+                        "multi" -> (activity as OneVsOneGameActivity).nextRound()
                     }
                 }, 2000)
             }

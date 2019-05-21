@@ -12,6 +12,7 @@ import com.example.asklikethat.api.Query
 import com.example.asklikethat.api.TriviaAPIService
 import com.example.asklikethat.api.TriviaDTO
 import com.example.asklikethat.datebase.DatabaseHandler
+import com.example.asklikethat.login.databaseArchitecture.UserAccount
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
@@ -23,12 +24,16 @@ import java.io.IOException
 class MainActivity : AppCompatActivity() {
     val singlePlayerRequestCode = 1
     var dbHandler: DatabaseHandler? = null
+    //Zalogowane konto
+    private lateinit var currentAccount: UserAccount
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         dbHandler = DatabaseHandler(this)
+        currentAccount = intent.getSerializableExtra("CURRENT_USER") as UserAccount
+        textView.text = ("Hello " + currentAccount.login + "!")
 
         val mp = MediaPlayer.create(this,R.raw.eminem1)
         mp.isLooping = true
@@ -49,6 +54,10 @@ class MainActivity : AppCompatActivity() {
         //if (success){
           //  val toast = Toast.makeText(this,"Saved Successfully", Toast.LENGTH_LONG).show()
         //}
+    }
+
+    fun logOut(v: View){
+        finish()
     }
 
     fun startSinglePlayer(view: View) {

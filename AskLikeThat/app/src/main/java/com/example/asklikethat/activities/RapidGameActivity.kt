@@ -1,31 +1,24 @@
 package com.example.asklikethat.activities
 
-import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import com.example.asklikethat.Player
 import com.example.asklikethat.PointCounter
 import com.example.asklikethat.Question
 import com.example.asklikethat.R
-import kotlinx.android.synthetic.main.fragment_rapid_things.*
-
-
-
-
 
 
 class RapidGameActivity : AppCompatActivity() {
     private var currentQuestionIndex = 0
     private lateinit var questionsList: ArrayList<Question>
     private lateinit var currentQuestion: Question
-    private val player = Player("Player")
+    private val player = Player("Player", "", 0)
     private val pointCounter = PointCounter(player)
     private val endGameRequestCode = 123
-    private var failed = 0;
-    private var correct = 0;
-    private var block = false;
+    private var failed = 0
+    private var correct = 0
+    private var block = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

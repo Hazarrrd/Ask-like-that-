@@ -11,6 +11,14 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".activities.OneVsOneGameActivity">
+        </activity>
+        <activity android:name=".activities.OneVsOneResultActivity">
+        </activity>
+        <activity android:name=".activities.NewGameActivity">
+        </activity>
+        <activity android:name=".activities.BrowseRoomsActivity">
+        </activity>
         <activity android:name=".activities.RankingActivity">
         </activity>
         <activity android:name=".activities.EndGameActivity">

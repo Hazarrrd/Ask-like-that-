@@ -5,7 +5,9 @@
         and skipped %4$d questions!
     </string>
     <string name="end_normal_game_result_text">You answered correctly to %1$d of %2$d questions!</string>
-    <string name="end_rapid_game_result_text_with_record">Your score is %1$d ! You answered correctly to %2$d , incorrectly to %3$d and skipped %4$d questions! This result has been placed at %5$d in our ranking </string>
+    <string name="end_rapid_game_result_text_with_record">Your score is %1$d ! You answered correctly to %2$d ,
+        incorrectly to %3$d and skipped %4$d questions! This result has been placed at %5$d in our ranking
+    </string>
     <string name="end_game_header_text">Congratulations, %1$s</string>
 
     <!-- TODO: Remove or change this placeholder text -->

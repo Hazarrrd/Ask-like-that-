@@ -1,6 +1,5 @@
 package com.example.asklikethat.activities
 
-import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -13,7 +12,7 @@ class SinglePlayerGameActivity : AppCompatActivity() {
     private var currentQuestionIndex = 0
     private lateinit var questionsList: ArrayList<Question>
     private lateinit var currentQuestion: Question
-    private val player = Player("Player")
+    private val player = Player("Player", "tok3n", 0)
     private val pointCounter = PointCounter(player)
     private val endGameRequestCode = 123
 

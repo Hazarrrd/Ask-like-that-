@@ -64,8 +64,8 @@ class LoginActivity : AppCompatActivity() {
                 userAccountViewModel.insert(
                     UserAccount(
                         accountString.split(";-")[0],
-                        accountString.split(";-")[0],
-                        accountString.split(";-")[0]))
+                        accountString.split(";-")[1],
+                        accountString.split(";-")[2]))
             }
         }
     }

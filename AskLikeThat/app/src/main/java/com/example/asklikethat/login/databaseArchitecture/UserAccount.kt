@@ -11,7 +11,7 @@ import java.io.Serializable
  */
 
 @Entity(tableName = "user_accounts")
-class UserAccount(val login: String, val email: String, val password: String): Serializable {
+class UserAccount(val login: String, var email: String, var password: String, var description: String, var bestResult: String): Serializable {
     @PrimaryKey(autoGenerate = true)
     public var id: Int = 0
 }

@@ -54,5 +54,32 @@
             app:layout_constraintTop_toTopOf="parent" android:textOff="OFF music"
             android:textOn="ON music" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="1.0"/>
+    <Button
+            android:text="Edit account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button6"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toStartOf="@+id/music"
+            app:layout_constraintStart_toEndOf="@+id/button5"
+            app:layout_constraintHorizontal_bias="0.0" android:onClick="edit"/>
+    <Button
+            android:text="find"
+            android:layout_width="88dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/button7"
+            app:layout_constraintTop_toBottomOf="@+id/music"
+            android:layout_marginTop="32dp"
+            app:layout_constraintStart_toEndOf="@+id/playerInput" android:layout_marginStart="8dp"
+            android:onClick="findPlayer"/>
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/playerInput"
+            android:hint="find player"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button5" android:layout_marginTop="32dp"
+            android:layout_marginStart="32dp"/>
 
 </android.support.constraint.ConstraintLayout>

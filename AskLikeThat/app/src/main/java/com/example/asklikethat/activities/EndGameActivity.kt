@@ -18,7 +18,7 @@ class EndGameActivity : AppCompatActivity() {
         MobileAds.initialize(this, "ca-app-pub-1037581054129545~3594761042")
 
         mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+        mInterstitialAd.adUnitId = "ca-app-pub-1037581054129545/1518906824"
         //testowa reklama ca-app-pub-3940256099942544/1033173712
         // to jest moja reklama ca-app-pub-1037581054129545/1518906824, która nie działa ;__; (podobno czasem na początku nie działają)
         // to używamy testowej

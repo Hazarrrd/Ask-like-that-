@@ -68,7 +68,9 @@ class LoginActivity : AppCompatActivity() {
                         accountString.split(";-")[1],
                         accountString.split(";-")[2],
                         accountString.split(";-")[3],
-                        accountString.split(";-")[4]))
+                        accountString.split(";-")[4],
+                        null
+                    ))
             }
         }
     }

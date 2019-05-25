@@ -3,6 +3,7 @@ package com.example.asklikethat.activities
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.graphics.Bitmap
 import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.ByteArrayOutputStream
 import java.io.IOException
 
 
@@ -154,4 +156,5 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(applicationContext, RankingActivity::class.java)
         startActivityForResult(intent, singlePlayerRequestCode)
     }
+
 }

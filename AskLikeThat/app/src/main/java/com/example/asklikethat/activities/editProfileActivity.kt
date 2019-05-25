@@ -1,10 +1,13 @@
 package com.example.asklikethat.activities
 
+import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
 import com.example.asklikethat.R
@@ -14,6 +17,9 @@ import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 import java.security.MessageDigest
+import com.google.android.gms.common.util.IOUtils.toByteArray
+import java.io.ByteArrayOutputStream
+
 
 class editProfileActivity : AppCompatActivity() {
 
@@ -37,6 +43,11 @@ class editProfileActivity : AppCompatActivity() {
     fun save(v: View){
         currentAccount.description = editText.text.toString()
         userAccountViewModel.update(currentAccount)
+        finish()
+    }
+
+    fun photo(v: View){
+        dispatchTakePictureIntent()
         finish()
     }
 
@@ -67,5 +78,32 @@ class editProfileActivity : AppCompatActivity() {
         val digest = MessageDigest.getInstance(algorithm)
         val bytes = digest.digest(this.toByteArray(Charsets.UTF_8))
         return bytes.fold("", { str, it -> str + "%02x".format(it) })
+    }
+
+    private fun dispatchTakePictureIntent() {
+       // Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                startActivityForResult(takePictureIntent, 100)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+         //super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK
+            && requestCode == 100) {
+            val imageBitmap = data!!.extras.get("data") as Bitmap
+            val bos = ByteArrayOutputStream()
+            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, bos)
+            val bArray = bos.toByteArray()
+            currentAccount.photo = bArray
+            userAccountViewModel.update(currentAccount)
+
+            Toast.makeText(this, "" + " Photo added ", Toast.LENGTH_SHORT).show()
+
+        }
+         Toast.makeText(this, ""  + "222 AAAAAAA", Toast.LENGTH_SHORT).show()
     }
 }

@@ -2,6 +2,7 @@ package com.example.asklikethat.login.databaseArchitecture
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
+import android.graphics.Bitmap
 import java.io.Serializable
 
 /**
@@ -11,7 +12,14 @@ import java.io.Serializable
  */
 
 @Entity(tableName = "user_accounts")
-class UserAccount(val login: String, var email: String, var password: String, var description: String, var bestResult: String): Serializable {
+class UserAccount(
+    val login: String,
+    var email: String,
+    var password: String,
+    var description: String,
+    var bestResult: String,
+    var photo: ByteArray?
+): Serializable {
     @PrimaryKey(autoGenerate = true)
     public var id: Int = 0
 }

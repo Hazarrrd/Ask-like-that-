@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
+        val toast = Toast.makeText(this,"HELLOy", Toast.LENGTH_LONG).show()
         userAccountViewModel = ViewModelProviders.of(this).get(UserAccountViewModel::class.java)
         userAccountViewModel.allUserAccounts.observe(this, Observer<List<UserAccount>> {})
         //if (success){

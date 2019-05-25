@@ -59,13 +59,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        val toast = Toast.makeText(this,"HELLOy", Toast.LENGTH_LONG).show()
         userAccountViewModel = ViewModelProviders.of(this).get(UserAccountViewModel::class.java)
         userAccountViewModel.allUserAccounts.observe(this, Observer<List<UserAccount>> {})
         //if (success){
           //  val toast = Toast.makeText(this,"Saved Successfully", Toast.LENGTH_LONG).show()
         //}
     }
+
 
     fun logOut(v: View){
         mp.stop()
@@ -91,6 +91,8 @@ class MainActivity : AppCompatActivity() {
 
     fun edit(v: View){
 
+        updatePlayer()
+
         val intent: Intent = Intent(this, editProfileActivity::class.java).
             putExtra("USER", currentAccount)
         startActivity(intent)
@@ -99,6 +101,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startSinglePlayer(view: View) {
+        updatePlayer()
         (view as Button).isClickable = false
         val service = TriviaAPIService()
         val query = Query()
@@ -127,6 +130,9 @@ class MainActivity : AppCompatActivity() {
 
 
     fun startRapid(view: View) {
+
+        updatePlayer()
+
         (view as Button).isClickable = false
         val service = TriviaAPIService()
         val query = Query()
@@ -157,4 +163,13 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(intent, singlePlayerRequestCode)
     }
 
+    fun updatePlayer() {
+        val allUserAccounts: ArrayList<UserAccount> = userAccountViewModel.allUserAccounts.value as ArrayList<UserAccount>
+        for(account in allUserAccounts){
+            if(account.login.compareTo(currentAccount.login) == 0){
+                currentAccount = account
+                break
+            }
+        }
+    }
 }

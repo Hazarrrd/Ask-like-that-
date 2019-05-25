@@ -9,11 +9,11 @@ import com.example.asklikethat.R
 import com.example.asklikethat.firebase.OneVsOneGame
 import kotlinx.android.synthetic.main.room_list_item_layout.view.*
 
-class RoomsListAdapter(
+class GamesListAdapter(
     private val dataset: ArrayList<OneVsOneGame>,
     val context: Context,
     private val clickListener: (OneVsOneGame) -> Unit
-) : RecyclerView.Adapter<RoomsListAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<GamesListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.room_list_item_layout, parent, false))

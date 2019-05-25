@@ -16,17 +16,11 @@ class FirestoreHandler {
         challenged: Player,
         questions: ArrayList<Question>
     ) {
+        val game = OneVsOneGame(gameName, challenger, challenged, questions, challenged,0)
         createDocumentInCollectionWithData(
             "1vs1",
             gameName,
-            OneVsOneGame(
-                gameName,
-                challenger,
-                challenged,
-                questions,
-                challenged,
-                0
-            ).toMap()
+            game.toMap()
         )
     }
 
@@ -53,6 +47,25 @@ class FirestoreHandler {
             .get()
     }
 
+    fun deleteGame(gameName: String): Task<Void> {
+        return firestore.collection("/1vs1")
+            .document(gameName)
+            .delete()
+    }
+
+    fun getGamesForPlayerAsChallenger(playerName: String): Task<QuerySnapshot> {
+        return firestore.collection("/1vs1")
+            .whereEqualTo("challenger.name", playerName)
+            .get()
+    }
+
+    fun getGamesForPlayerAsChallenged(playerName: String): Task<QuerySnapshot> {
+        return firestore.collection("/1vs1")
+            .whereEqualTo("challenged.name", playerName)
+            .get()
+    }
+
+
     private fun createDocumentInCollectionWithData(
         collectionName: String,
         documentName: String,
@@ -61,11 +74,5 @@ class FirestoreHandler {
         return firestore.collection(collectionName)
             .document(documentName)
             .set(data)
-    }
-
-    fun deleteGame(gameName: String): Task<Void> {
-        return firestore.collection("/1vs1")
-            .document(gameName)
-            .delete()
     }
 }

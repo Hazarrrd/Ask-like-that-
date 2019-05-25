@@ -48,7 +48,6 @@ class NewGameActivity : AppCompatActivity() {
 
     private fun onItemClick(player: FirebasePlayer) {
         selectedPlayer = player
-        println(player.name)
     }
 
     fun onSubmit(view: View) {
@@ -66,7 +65,6 @@ class NewGameActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<TriviaDTO>, response: Response<TriviaDTO>) {
                         if (response.isSuccessful) {
                             val body = response.body()!!
-                            println(body)
                             FirestoreHandler().createGame(
                                 gameNameEditText.text.toString(),
                                 Player(currentPlayerName, currentPlayerToken, 0),

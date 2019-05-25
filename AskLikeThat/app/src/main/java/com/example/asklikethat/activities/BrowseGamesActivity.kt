@@ -7,36 +7,30 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import com.example.asklikethat.R
 import com.example.asklikethat.firebase.FirestoreHandler
 import com.example.asklikethat.firebase.OneVsOneGame
-import com.google.firebase.FirebaseApp
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 
-class BrowseRoomsActivity : AppCompatActivity() {
+class BrowseGamesActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var roomListAdapter: RecyclerView.Adapter<*>
     private lateinit var listLayoutManager: RecyclerView.LayoutManager
-    private var gamesList = arrayListOf<OneVsOneGame>()
-    private lateinit var firebase: FirebaseApp
-    private lateinit var firestore: FirebaseFirestore
-    private lateinit var token: String
-    private lateinit var playerName: String
     private lateinit var selectedGame: OneVsOneGame
+    private lateinit var playerName: String
+    private lateinit var token: String
+    private var gamesList = arrayListOf<OneVsOneGame>()
+    private val firestore = FirestoreHandler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_browse_rooms)
-        playerName = getSharedPreferences("token", Context.MODE_PRIVATE)
-            .getString("playerName", "")!!
-        token = getSharedPreferences("token", Context.MODE_PRIVATE)
-            .getString("token", "")!!
+        getPlayerInfo()
         loadGames()
 
         listLayoutManager = LinearLayoutManager(this)
-        roomListAdapter = RoomsListAdapter(gamesList, applicationContext) { game -> onItemClick(game) }
+        roomListAdapter = GamesListAdapter(gamesList, applicationContext) { game -> onItemClick(game) }
         recyclerView = findViewById<RecyclerView>(R.id.recyclerView).apply {
             layoutManager = listLayoutManager
             adapter = roomListAdapter
@@ -45,32 +39,21 @@ class BrowseRoomsActivity : AppCompatActivity() {
     }
 
     private fun loadGames() {
-        firebase = FirebaseApp.initializeApp(applicationContext)!!
-        firestore = FirebaseFirestore.getInstance()
         gamesList.clear()
-        firestore.collection("/1vs1")
-            .whereEqualTo("challenged.name", playerName)
-            .get()
+        firestore.getGamesForPlayerAsChallenged(playerName)
             .addOnSuccessListener { result ->
-                gamesList.addAll(result.map { document ->
-                    OneVsOneGame(document.id, document.data)
-                })
+                gamesList.addAll(mapDocumentsToGames(result))
                 roomListAdapter.notifyDataSetChanged()
             }
-        firestore.collection("/1vs1")
-            .whereEqualTo("challenger.name", playerName)
-            .get()
+        firestore.getGamesForPlayerAsChallenger(playerName)
             .addOnSuccessListener { result ->
-                gamesList.addAll(result.map { document ->
-                    OneVsOneGame(document.id, document.data)
-                })
+                gamesList.addAll(mapDocumentsToGames(result))
                 roomListAdapter.notifyDataSetChanged()
             }
     }
 
     private fun onItemClick(game: OneVsOneGame) {
         if (game.nextToPlay.name == playerName && !game.isEnded()) {
-            println("$playerName turn")
             selectedGame = game
             val intent = Intent(this, OneVsOneGameActivity::class.java).apply {
                 putExtra("question", game.questions[game.currentRound])
@@ -79,26 +62,39 @@ class BrowseRoomsActivity : AppCompatActivity() {
         }
     }
 
-    fun onButtonClick(view: View) {
+    fun onSubmitButtonClick(view: View) {
         val intent = Intent(applicationContext, NewGameActivity::class.java)
-        startActivityForResult(intent, REQUEST_NEW_GAME)
+        startActivity(intent)
+    }
+
+    fun onRefreshButtonClick(view: View) {
+        loadGames()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            REQUEST_PLAY_GAME -> {
-                if(resultCode == Activity.RESULT_OK) {
-                    val answerCorrect = data!!
-                        .getBooleanExtra("answerCorrect", false)
-                    FirestoreHandler().nextRoundInGame(selectedGame, answerCorrect)
-                }
+        if (requestCode == REQUEST_PLAY_GAME) {
+            if(resultCode == Activity.RESULT_OK) {
+                val answerCorrect = data!!
+                    .getBooleanExtra("answerCorrect", false)
+                FirestoreHandler().nextRoundInGame(selectedGame, answerCorrect)
             }
         }
         loadGames()
     }
 
+    private fun getPlayerInfo() {
+        val sharedPreferences= getSharedPreferences("token", Context.MODE_PRIVATE)
+        playerName = sharedPreferences.getString("playerName", "")!!
+        token = sharedPreferences.getString("token", "")!!
+    }
+
+    private fun mapDocumentsToGames(querySnapshot: QuerySnapshot): List<OneVsOneGame> {
+        return querySnapshot.map { document ->
+            OneVsOneGame(document.id, document.data)
+        }
+    }
+
     companion object {
-        const val REQUEST_NEW_GAME = 55
         const val REQUEST_PLAY_GAME = 121
     }
 }

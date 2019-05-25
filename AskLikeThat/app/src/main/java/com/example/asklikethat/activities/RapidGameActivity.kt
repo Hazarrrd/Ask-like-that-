@@ -9,6 +9,7 @@ import com.example.asklikethat.Player
 import com.example.asklikethat.PointCounter
 import com.example.asklikethat.Question
 import com.example.asklikethat.R
+import com.example.asklikethat.login.databaseArchitecture.UserAccount
 import kotlinx.android.synthetic.main.fragment_rapid_things.*
 
 
@@ -26,13 +27,14 @@ class RapidGameActivity : AppCompatActivity() {
     private var failed = 0;
     private var correct = 0;
     private var block = false;
+    private lateinit var currentAccount: UserAccount
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         questionsList = intent.getParcelableArrayListExtra<Question>("questions")
-
-
+        currentAccount = intent.getSerializableExtra("USER") as UserAccount
+        player.name = currentAccount.login
         startRound()
         setContentView(R.layout.activity_rapid_game)
 
@@ -62,7 +64,7 @@ class RapidGameActivity : AppCompatActivity() {
     fun handleEndGame() {
         val quizResult = Intent(applicationContext, EndGameActivity::class.java)
         quizResult.putExtra("playerPoints", pointCounter.getPointsForPlayers()[player])
-        quizResult.putExtra("playerName", player.name)
+        quizResult.putExtra("player", currentAccount)
         quizResult.putExtra("kindOfGame", "rapid")
         quizResult.putExtra("skipped", currentQuestionIndex - failed - correct)
         quizResult.putExtra("correct", correct)

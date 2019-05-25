@@ -8,6 +8,7 @@ import com.example.asklikethat.Player
 import com.example.asklikethat.PointCounter
 import com.example.asklikethat.Question
 import com.example.asklikethat.R
+import com.example.asklikethat.login.databaseArchitecture.UserAccount
 
 class SinglePlayerGameActivity : AppCompatActivity() {
     private var currentQuestionIndex = 0
@@ -16,10 +17,13 @@ class SinglePlayerGameActivity : AppCompatActivity() {
     private val player = Player("Player")
     private val pointCounter = PointCounter(player)
     private val endGameRequestCode = 123
+    private lateinit var currentAccount: UserAccount
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         questionsList = intent.getParcelableArrayListExtra<Question>("questions")
+        currentAccount = intent.getSerializableExtra("USER") as UserAccount
+        player.name = currentAccount.login
         startRound()
         setContentView(R.layout.activity_singleplayer_game)
     }
@@ -44,7 +48,7 @@ class SinglePlayerGameActivity : AppCompatActivity() {
     private fun handleEndGame() {
         val quizResult = Intent(applicationContext, EndGameActivity::class.java)
         quizResult.putExtra("playerPoints", pointCounter.getPointsForPlayers()[player])
-        quizResult.putExtra("playerName", player.name)
+        quizResult.putExtra("player", currentAccount)
         quizResult.putExtra("maxPoints", questionsList.size)
         quizResult.putExtra("kindOfGame", "normal")
         startActivityForResult(quizResult, endGameRequestCode)

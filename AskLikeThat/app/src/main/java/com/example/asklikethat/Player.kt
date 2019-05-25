@@ -1,5 +1,5 @@
 package com.example.asklikethat
 
-class Player(val name: String) {
+class Player(var name: String) {
 
 }

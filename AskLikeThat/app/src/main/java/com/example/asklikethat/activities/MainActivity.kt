@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     val singlePlayerRequestCode = 1
     var dbHandler: DatabaseHandler? = null
     private lateinit var userAccountViewModel: UserAccountViewModel
-    //Zalogowane konto
     private lateinit var currentAccount: UserAccount
     private lateinit var mp : MediaPlayer
 
@@ -118,6 +117,7 @@ class MainActivity : AppCompatActivity() {
                     val body = response.body()!!
                     val intent = Intent(applicationContext, SinglePlayerGameActivity::class.java)
                         .apply { putParcelableArrayListExtra("questions", body.results) }
+                    intent.putExtra("USER", currentAccount)
 
                     startActivityForResult(intent, singlePlayerRequestCode)
                     view.isClickable = true
@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity() {
                     val body = response.body()!!
                     val intent = Intent(applicationContext, RapidGameActivity::class.java)
                         .apply { putParcelableArrayListExtra("questions", body.results) }
-
+                    intent.putExtra("USER", currentAccount)
                     startActivityForResult(intent, singlePlayerRequestCode)
                     view.isClickable = true
                 }

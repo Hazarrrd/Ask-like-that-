@@ -1,12 +1,13 @@
-package com.example.asklikethat
+package com.example.asklikethat.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.example.asklikethat.R
 import com.example.asklikethat.login.databaseArchitecture.UserAccount
 import kotlinx.android.synthetic.main.activity_watching_profiles.*
 
-class watchingProfiles : AppCompatActivity() {
+class watchingProfilesActivity : AppCompatActivity() {
 
     private lateinit var currentAccount: UserAccount
 

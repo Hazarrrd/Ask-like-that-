@@ -15,11 +15,8 @@ import com.example.asklikethat.api.Query
 import com.example.asklikethat.api.TriviaAPIService
 import com.example.asklikethat.api.TriviaDTO
 import com.example.asklikethat.datebase.DatabaseHandler
-import com.example.asklikethat.editProfile
 import com.example.asklikethat.login.databaseArchitecture.UserAccount
 import com.example.asklikethat.login.databaseArchitecture.UserAccountViewModel
-import com.example.asklikethat.watchingProfiles
-import kotlinx.android.synthetic.main.activity_login.*
 
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -79,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         for(account in allUserAccounts){
             if(account.login.compareTo(playerInput.text.toString()) == 0){
 
-                val intent: Intent = Intent(this, watchingProfiles::class.java).
+                val intent: Intent = Intent(this, watchingProfilesActivity::class.java).
                     putExtra("USER", account)
                 startActivity(intent)
                 broken = true
@@ -92,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 
     fun edit(v: View){
 
-        val intent: Intent = Intent(this, editProfile::class.java).
+        val intent: Intent = Intent(this, editProfileActivity::class.java).
             putExtra("USER", currentAccount)
         startActivity(intent)
 

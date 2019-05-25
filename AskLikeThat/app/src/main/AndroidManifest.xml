@@ -11,9 +11,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".editProfile">
+        <activity android:name=".activities.editProfileActivity">
         </activity>
-        <activity android:name=".watchingProfiles">
+        <activity android:name=".activities.watchingProfilesActivity">
         </activity>
         <activity android:name=".login.RegisterActivity">
         </activity>

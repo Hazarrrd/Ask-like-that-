@@ -44,7 +44,7 @@
             <Button
                     android:text="Register"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/rbtnRegister" android:layout_weight="1"
+                    android:layout_height="wrap_content" android:id="@+id/changePass" android:layout_weight="1"
                     android:onClick="register"/>
         </LinearLayout>
     </LinearLayout>

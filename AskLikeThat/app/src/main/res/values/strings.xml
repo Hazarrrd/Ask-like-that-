@@ -10,6 +10,7 @@
     </string>
     <string name="banner_ad_unit_id">ca-app-pub-1037581054129545/1518906824</string>
     <string name="end_game_header_text">Congratulations, %1$s</string>
+    <string name="end_game_header_text_personal_best">Congratulations, %1$s NEW PERSONAL BEST!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.asklikethat.R
+import com.example.asklikethat.login.databaseArchitecture.UserAccount
 import com.google.android.gms.ads.*
 import kotlinx.android.synthetic.main.activity_end_game.*
 
@@ -45,11 +46,11 @@ class EndGameActivity : AppCompatActivity() {
 
             val maxPoints = intent.getIntExtra("maxPoints", 0)
             val playerPoints = intent.getIntExtra("playerPoints", 0)
-            val playerName = intent.getStringExtra("playerName")
+            val player = intent.getSerializableExtra("player") as UserAccount
 
             val endGameFragment = EndGameFragment()
             val endGameData = Bundle().apply {
-                putString("playerName", playerName)
+                putSerializable("player", player)
                 putInt("playerPoints", playerPoints)
                 putInt("maxPoints", maxPoints)
                 putString("kindOfGame", kindOfGame)
@@ -63,11 +64,11 @@ class EndGameActivity : AppCompatActivity() {
             val correct = intent.getIntExtra("correct", 0)
             val failed = intent.getIntExtra("failed", 0)
             val playerPoints = intent.getIntExtra("playerPoints", 0)
-            val playerName = intent.getStringExtra("playerName")
+            val player = intent.getSerializableExtra("player") as UserAccount
 
             val endGameFragment = EndGameFragment()
             val endGameData = Bundle().apply {
-                putString("playerName", playerName)
+                putSerializable("player", player)
                 putString("kindOfGame", kindOfGame)
                 putInt("skipped", skipped)
                 putInt("correct", correct)

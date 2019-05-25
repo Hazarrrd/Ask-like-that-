@@ -1,39 +1,40 @@
 {
   "project_info": {
-    "project_number": "533578720407",
-    "firebase_url": "https://asklikethat-c67b4.firebaseio.com",
-    "project_id": "asklikethat-c67b4",
-    "storage_bucket": "asklikethat-c67b4.appspot.com"
+    "project_number": "103610685412",
+    "firebase_url": "https://asklikethat-91da6.firebaseio.com",
+    "project_id": "asklikethat-91da6",
+    "storage_bucket": "asklikethat-91da6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:533578720407:android:9ca03eb89020f96a",
+        "mobilesdk_app_id": "1:103610685412:android:9ca03eb89020f96a",
         "android_client_info": {
           "package_name": "com.example.asklikethat"
         }
       },
       "oauth_client": [
         {
-          "client_id": "533578720407-olmraml2l2imt9uocbeljqpeor9m3ug3.apps.googleusercontent.com",
+          "client_id": "103610685412-qqll56dkoicv8o71iemf8r38qk19o3rj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCrZ3Q2JRZPmn5-ytj7Dv-Z4CGiCiEgFWc"
+          "current_key": "AIzaSyBusQVqgXtJ63ypiPzErT4yPDRg8kvJZDs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "533578720407-olmraml2l2imt9uocbeljqpeor9m3ug3.apps.googleusercontent.com",
+              "client_id": "103610685412-qqll56dkoicv8o71iemf8r38qk19o3rj.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-1037581054129545~3594761042"
     }
   ],
   "configuration_version": "1"

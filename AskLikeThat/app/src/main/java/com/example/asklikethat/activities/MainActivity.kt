@@ -30,16 +30,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         FirebaseInstanceId.getInstance()
             .instanceId
-            .addOnSuccessListener { result ->
-                run {
+            .addOnSuccessListener { result -> run {
                     val sharedPreferences = getSharedPreferences("token", Context.MODE_PRIVATE)
-                    val editor = sharedPreferences.edit()
-                    println(result.token)
-                    editor.putString("token", result.token)
-                    editor.putString("playerName", "Maciek")
+                    val editor = sharedPreferences.edit().apply {
+                        putString("token", result.token)
+                        putString("playerName", "Maciek")
+                    }
                     editor.apply()
-                }
-            }
+            }}
 
         dbHandler = DatabaseHandler(this)
 
@@ -115,7 +113,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startMultiplayer(view: View) {
-        val intent = Intent(applicationContext, BrowseRoomsActivity::class.java)
+        val intent = Intent(applicationContext, BrowseGamesActivity::class.java)
         startActivityForResult(intent, 55)
     }
 

@@ -17,7 +17,7 @@
         </activity>
         <activity android:name=".activities.NewGameActivity">
         </activity>
-        <activity android:name=".activities.BrowseRoomsActivity">
+        <activity android:name=".activities.BrowseGamesActivity">
         </activity>
         <activity android:name=".activities.RankingActivity">
         </activity>

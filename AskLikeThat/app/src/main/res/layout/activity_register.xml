@@ -23,12 +23,6 @@
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/retEmail" android:hint="Email address"/>
-        <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
                 android:id="@+id/retPassword" android:hint="Password"/>

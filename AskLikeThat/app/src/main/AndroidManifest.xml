@@ -42,7 +42,8 @@
         </activity>
         <activity android:name=".activities.BrowseGamesActivity">
         </activity>
-        <activity android:name=".activities.RankingActivity">
+        <activity android:name=".activities.RankingActivity"
+                  android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activities.EndGameActivity">
         </activity>

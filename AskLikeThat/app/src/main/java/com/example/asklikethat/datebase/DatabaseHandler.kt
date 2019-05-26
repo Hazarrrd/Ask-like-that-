@@ -85,7 +85,7 @@ class DatabaseHandler(context: Context) :
     //get all users
     fun getRanking(): String {
 
-        var allUser: String = "";
+        var allUser: String = "POSITION/PLAYER/SCORE \n";
         val db = readableDatabase
         val selectALLQuery = "SELECT * FROM $TABLE_NAME ORDER BY $POSITION ASC LIMIT 10"
         val cursor = db.rawQuery(selectALLQuery, null)
@@ -95,7 +95,7 @@ class DatabaseHandler(context: Context) :
                     var player = cursor.getString(cursor.getColumnIndex(PLAYER))
                     var points = cursor.getString(cursor.getColumnIndex(POINTS))
                     var position = cursor.getString(cursor.getColumnIndex(POSITION))
-                    allUser = "$allUser\n$position $player $points"
+                    allUser = "$allUser\n$position. \t\t $player -> \t $points"
                 } while (cursor.moveToNext())
             }
         }

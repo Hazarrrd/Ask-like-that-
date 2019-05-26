@@ -1,4 +1,4 @@
-package com.example.asklikethat.login
+package com.example.asklikethat.activities
 
 import android.app.Activity
 import android.support.v7.app.AppCompatActivity

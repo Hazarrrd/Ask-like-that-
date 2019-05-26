@@ -1,4 +1,4 @@
-package com.example.asklikethat.login
+package com.example.asklikethat.activities
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
@@ -10,10 +10,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.asklikethat.R
-import com.example.asklikethat.activities.MainActivity
 import com.example.asklikethat.firebase.FirestoreHandler
 import com.example.asklikethat.login.databaseArchitecture.UserAccount
 import com.example.asklikethat.login.databaseArchitecture.UserAccountViewModel
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_login.*
 import java.security.MessageDigest
 
@@ -25,6 +25,10 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        Picasso.with(this) // Context
+            .load("https://cdn.sixthandi.org/wp/wp-content/uploads/2019/01/MansAttemptAtMindfulness.jpg") // URL or file
+            .into(image2);
 
         userAccountViewModel = ViewModelProviders.of(this).get(UserAccountViewModel::class.java)
         userAccountViewModel.allUserAccounts.observe(this, Observer<List<UserAccount>> {})
@@ -64,7 +68,12 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "No data received from register activity", Toast.LENGTH_SHORT).show()
             }else{
                 val accountString = data.getStringExtra("NEW_ACCOUNT").split(";-")
-                DoAsync { FirestoreHandler().createPlayer(accountString[0], "")}
+                DoAsync {
+                    FirestoreHandler().createPlayer(
+                        accountString[0],
+                        ""
+                    )
+                }
                 userAccountViewModel.insert(
                     UserAccount(
                         accountString[0],

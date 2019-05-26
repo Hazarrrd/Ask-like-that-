@@ -1,6 +1,5 @@
 package com.example.asklikethat.activities
 
-import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -15,12 +14,8 @@ import com.example.asklikethat.R
 import com.example.asklikethat.login.databaseArchitecture.UserAccount
 import com.example.asklikethat.login.databaseArchitecture.UserAccountViewModel
 import kotlinx.android.synthetic.main.activity_edit_profile.*
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_register.*
 import java.security.MessageDigest
-import com.google.android.gms.common.util.IOUtils.toByteArray
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_watching_profiles.*
 import java.io.ByteArrayOutputStream
 
 

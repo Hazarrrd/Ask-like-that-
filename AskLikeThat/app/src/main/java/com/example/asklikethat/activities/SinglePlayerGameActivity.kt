@@ -83,7 +83,7 @@ class SinglePlayerGameActivity : AppCompatActivity() {
         return AnswersFragment().apply { arguments = answersData }
     }
 
-    override fun onBackPressed() {}
+    override fun onBackPressed() {finish()}
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

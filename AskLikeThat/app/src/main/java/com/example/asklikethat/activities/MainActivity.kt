@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity() {
         (view as Button).isClickable = false
         val service = TriviaAPIService()
         val query = Query()
-            .setAmount(3)
+            .setAmount(6)
             .setType("multiple")
         val call = service.getQuestions(query)
         call.enqueue(object : Callback<TriviaDTO> {

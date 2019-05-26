@@ -45,6 +45,7 @@ class AnswersFragment : Fragment() {
     }
 
     private fun assignAnswersToButtons(buttons: ArrayList<Button>) {
+        buttons.shuffle()
         buttons.forEachIndexed { i, button ->
             button.text = Html.fromHtml(answers[i], Html.FROM_HTML_MODE_LEGACY)
         }

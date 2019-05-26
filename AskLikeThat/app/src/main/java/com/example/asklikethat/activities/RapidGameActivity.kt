@@ -9,6 +9,10 @@ import com.example.asklikethat.Question
 import com.example.asklikethat.R
 import com.example.asklikethat.login.databaseArchitecture.UserAccount
 import kotlinx.android.synthetic.main.fragment_rapid_things.*
+import android.widget.Toast
+import android.R.attr.data
+
+
 
 class RapidGameActivity : AppCompatActivity() {
     private var currentQuestionIndex = 0
@@ -83,9 +87,14 @@ class RapidGameActivity : AppCompatActivity() {
     }
 
     fun skip() {
-        if(!block){
+        if(!block && currentQuestionIndex <160){
             currentQuestionIndex += 1
             startRound()
+        } else if(currentQuestionIndex >=160){
+            Toast.makeText(
+                this, "YOU SKIPPED TOO MUCH!!",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -106,7 +115,8 @@ class RapidGameActivity : AppCompatActivity() {
         return AnswersFragment().apply { arguments = answersData }
     }
 
-    override fun onBackPressed() {}
+    override fun onBackPressed() {finish()}
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

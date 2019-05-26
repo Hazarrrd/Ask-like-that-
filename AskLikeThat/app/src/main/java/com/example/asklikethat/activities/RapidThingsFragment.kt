@@ -49,7 +49,7 @@ class RapidThingsFragment : Fragment() {
 
 
     fun startTimer() {
-        cTimer = object : CountDownTimer(10000, 1000) {
+        cTimer = object : CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 textView2.text = "Time: " + millisUntilFinished / 1000
             }

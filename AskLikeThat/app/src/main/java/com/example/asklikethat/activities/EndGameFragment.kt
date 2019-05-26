@@ -13,6 +13,8 @@ import com.example.asklikethat.datebase.DatabaseHandler
 import com.example.asklikethat.datebase.Record
 import com.example.asklikethat.login.databaseArchitecture.UserAccount
 import com.example.asklikethat.login.databaseArchitecture.UserAccountViewModel
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_ranking.*
 import kotlinx.android.synthetic.main.fragment_single_player_end_game.*
 
 class EndGameFragment : Fragment() {
@@ -74,6 +76,11 @@ class EndGameFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        Picasso.with(context) // Context
+            .load("https://electrumdark.com/wp-content/uploads/2018/07/winner.jpeg") // URL or file
+            .into(image4);
+
 
         if(kindOfGame == "rapid"){
 

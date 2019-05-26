@@ -17,7 +17,8 @@
         <activity android:name=".activities.editProfileActivity"
                   android:screenOrientation="portrait" >
         </activity>
-        <activity android:name=".activities.watchingProfilesActivity">
+        <activity android:name=".activities.watchingProfilesActivity"
+                  android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activities.RegisterActivity">
         </activity>
@@ -45,13 +46,15 @@
         <activity android:name=".activities.RankingActivity"
                   android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.EndGameActivity">
+        <activity android:name=".activities.EndGameActivity"
+                  android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activities.SinglePlayerGameActivity">
         </activity>
         <activity android:name=".activities.RapidGameActivity">
         </activity>
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.MainActivity"
+                  android:screenOrientation="portrait">
         </activity>
     </application>
 

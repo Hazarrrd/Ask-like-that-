@@ -1,6 +1,7 @@
 package com.example.asklikethat.firebase
 
 class FirebasePlayer {
+    var isSelected: Boolean = false
     lateinit var name: String
     lateinit var token: String
     var points: Int = 0

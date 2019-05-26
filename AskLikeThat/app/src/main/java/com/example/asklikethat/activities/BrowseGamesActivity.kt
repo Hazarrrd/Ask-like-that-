@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import com.example.asklikethat.Player
 import com.example.asklikethat.R
 import com.example.asklikethat.firebase.FirestoreHandler
 import com.example.asklikethat.firebase.OneVsOneGame
@@ -59,6 +60,16 @@ class BrowseGamesActivity : AppCompatActivity() {
                 putExtra("question", game.questions[game.currentRound])
             }
             startActivityForResult(intent, REQUEST_PLAY_GAME)
+        }
+        if (game.isEnded()) {
+            val intent = Intent(this, OneVsOneResultActivity::class.java).apply {
+                putExtra("player1", game.challenged.name)
+                putExtra("player1Points", game.challenged.points)
+                putExtra("player2", game.challenger.name)
+                putExtra("player2Points", game.challenger.points)
+                putExtra("rounds", game.currentRound)
+            }
+            startActivity(intent)
         }
     }
 

@@ -48,6 +48,7 @@ class NewGameActivity : AppCompatActivity() {
 
     private fun onItemClick(player: FirebasePlayer) {
         selectedPlayer = player
+        opponentListLabel.text = "Opponent: ${player.name}"
     }
 
     fun onSubmit(view: View) {

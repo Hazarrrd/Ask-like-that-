@@ -8,4 +8,7 @@
     <color name="background">#5b5b5b</color>
     <color name="primary">#008577</color>
     <color name="primaryDark">#00574B</color>
+    <color name="mint">#72ffb1</color>
+    <color name="doPary">#ffe271</color>
+    <color name="lacoste">#3fa8ff</color>
 </resources>

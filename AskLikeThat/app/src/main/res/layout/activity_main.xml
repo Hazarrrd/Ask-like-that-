@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
+        android:background="@color/lacoste"
         tools:context=".activities.MainActivity">
 
     <LinearLayout
@@ -17,14 +17,14 @@
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="0dp">
         <Button
                 android:text="@string/log_out"
-                android:background="@color/golden"
+                android:background="@color/white"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content" android:id="@+id/button5"
                 android:onClick="logOut"/>
         <Button
                 android:text="@string/edit_account"
-                android:background="@color/golden"
+                android:background="@color/white"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:background="@color/golden"
+                android:background="@color/white"
                 android:id="@+id/music"
                 android:textOff="@string/off_music"
                 android:textOn="@string/on_music"
@@ -63,28 +63,28 @@
             android:id="@+id/linearLayout">
         <Button
                 android:text="@string/single_player"
-                android:background="@color/golden"
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/button"
                 android:onClick="startSinglePlayer" android:layout_weight="1"/>
         <Button
                 android:text="@string/rapid_mode"
-                android:background="@color/golden"
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/button2" android:onClick="startRapid"
                 android:layout_weight="1"/>
         <Button
                 android:text="@string/ranking"
-                android:background="@color/golden"
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/button4"
                 android:onClick="showRecords" android:layout_weight="1"/>
         <Button
                 android:text="@string/multiplayer"
-                android:background="@color/golden"
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/multiButton"
@@ -92,7 +92,7 @@
     </LinearLayout>
     <Button
             android:text="@string/find"
-            android:background="@color/golden"
+            android:background="@color/white"
             android:layout_width="88dp"
             android:layout_height="wrap_content"
             android:id="@+id/button7"

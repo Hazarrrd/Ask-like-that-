@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:background="@color/lacoste"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,23 +19,31 @@
                 android:text="@string/new_game_label"
                 android:layout_width="166dp"
                 android:layout_height="44dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:id="@+id/newGameLabel" android:textAlignment="center"
                 android:layout_gravity="center_horizontal" android:textSize="30sp"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:ems="10"
                 android:id="@+id/gameNameEditText" android:hint="@string/game_name"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberSigned|numberDecimal"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:ems="10"
                 android:id="@+id/numberOfQuestions" android:hint="@string/number_of_questions"/>
         <TextView
                 android:text="@string/opponent"
                 android:layout_width="match_parent"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:layout_height="wrap_content" android:id="@+id/opponentListLabel" android:textAlignment="center"
                 android:labelFor="@id/opponentsView"/>
         <android.support.v7.widget.RecyclerView
@@ -43,6 +52,7 @@
         <Button
                 android:text="@string/create_game"
                 android:layout_width="wrap_content"
+                android:background="@color/white"
                 android:layout_height="wrap_content" android:id="@+id/submitCreatingButton" android:onClick="onSubmit"
                 android:layout_gravity="center_horizontal"/>
     </LinearLayout>

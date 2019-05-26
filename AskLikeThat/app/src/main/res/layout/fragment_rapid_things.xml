@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             android:background="@color/lacoste"
                                              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
@@ -14,6 +15,7 @@
             android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent">
         <Button
                 android:text="Skip question"
+                android:background="@color/white"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent" android:id="@+id/button3"
@@ -25,6 +27,8 @@
             <TextView
                     android:text="TextView"
                     android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_weight="1"
                     android:layout_height="wrap_content" android:id="@+id/textView2"

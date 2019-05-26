@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:background="@color/lacoste"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -10,6 +11,8 @@
     <TextView
             android:text="@string/result_overview"
             android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
             android:layout_height="wrap_content"
             android:id="@+id/resultOverviewHeader" android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
@@ -27,6 +30,8 @@
             app:layout_constraintStart_toStartOf="parent">
         <TextView
                 android:layout_width="match_parent"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:layout_height="wrap_content" android:id="@+id/winnerTextView" android:textAlignment="center"
                 android:textSize="30sp"/>
         <LinearLayout
@@ -39,10 +44,14 @@
                     android:layout_height="wrap_content" android:layout_weight="1">
                 <TextView
                         android:layout_width="match_parent"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
                         android:layout_height="wrap_content" android:id="@+id/player1NameTextView"
                         android:textSize="18sp" android:textAlignment="center"/>
                 <TextView
                         android:layout_width="match_parent"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
                         android:layout_height="wrap_content" android:id="@+id/player1PointsTextView"
                         android:textSize="36sp" android:textAlignment="center"/>
             </LinearLayout>
@@ -52,20 +61,26 @@
                     android:layout_height="wrap_content" android:layout_weight="1">
                 <TextView
                         android:layout_width="match_parent"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
                         android:layout_height="wrap_content" android:id="@+id/player2NameTextView"
                         android:textSize="18sp" android:textAlignment="center"/>
                 <TextView
                         android:layout_width="match_parent"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
                         android:layout_height="wrap_content" android:id="@+id/player2PointsTextView"
                         android:textSize="36sp" android:textAlignment="center"/>
             </LinearLayout>
         </LinearLayout>
         <Button
                 android:text="Button"
+                android:background="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/button8"/>
         <Button
                 android:text="Button"
+                android:background="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/button9"/>
     </LinearLayout>

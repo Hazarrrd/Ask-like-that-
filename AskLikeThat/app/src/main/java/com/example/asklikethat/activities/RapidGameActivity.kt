@@ -8,8 +8,6 @@ import com.example.asklikethat.PointCounter
 import com.example.asklikethat.Question
 import com.example.asklikethat.R
 import com.example.asklikethat.login.databaseArchitecture.UserAccount
-import kotlinx.android.synthetic.main.fragment_rapid_things.*
-
 
 class RapidGameActivity : AppCompatActivity() {
     private var currentQuestionIndex = 0
@@ -18,9 +16,9 @@ class RapidGameActivity : AppCompatActivity() {
     private val player = Player("Player", "", 0)
     private val pointCounter = PointCounter(player)
     private val endGameRequestCode = 123
-    private var failed = 0;
-    private var correct = 0;
-    private var block = false;
+    private var failed = 0
+    private var correct = 0
+    private var block = false
     private lateinit var currentAccount: UserAccount
 
 
@@ -35,10 +33,7 @@ class RapidGameActivity : AppCompatActivity() {
     }
 
     private fun startRound() {
-       // val fragment = supportFragmentManager.findFragmentById(R.id.fragment)  as RapidThingsFragment
-        //fragment.blockButton()
-       // button.isClickable = true;
-        block = false;
+        block = false
         if (currentQuestionIndex < questionsList.size) {
             currentQuestion = questionsList[currentQuestionIndex]
 
@@ -67,10 +62,8 @@ class RapidGameActivity : AppCompatActivity() {
     }
 
     fun checkAnswer(answer: String): Boolean {
-        block = true;
+        block = true
         val result = currentQuestion.isAnswerCorrect(answer)
-        //val fragment = supportFragmentManager.findFragmentById(R.id.fragment)  as RapidThingsFragment
-       // fragment.unblockButton()
         if (result) {
             correct ++
             currentQuestionIndex += 1
@@ -88,7 +81,7 @@ class RapidGameActivity : AppCompatActivity() {
     }
 
     fun skip() {
-        if(block == false){
+        if(!block){
             currentQuestionIndex += 1
             startRound()
         }

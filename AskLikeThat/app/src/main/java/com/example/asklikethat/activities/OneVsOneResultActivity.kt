@@ -10,4 +10,5 @@ class OneVsOneResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onevs_one_result)
     }
+
 }

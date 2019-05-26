@@ -6,24 +6,25 @@
              tools:context=".activities.AnswersFragment" android:id="@+id/answersButtonGrid"
              android:layout_gravity="center" android:gravity="center">
     <TableRow
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/firstRow"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal" android:layout_weight="1">
         <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" android:id="@+id/answerAButton"/>
+                android:layout_width="0dp"
+                android:layout_height="match_parent" android:id="@+id/answerAButton" android:layout_weight="1"/>
         <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" android:id="@+id/answerBButton"/>
+                android:layout_width="0dp"
+                android:layout_height="match_parent" android:id="@+id/answerBButton" android:layout_weight="1"/>
     </TableRow>
     <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" android:id="@+id/secondRow" android:gravity="center_horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/secondRow" android:gravity="center_horizontal"
+            android:layout_weight="1">
         <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/answerCButton"/>
+                android:layout_width="0dp"
+                android:layout_height="match_parent" android:id="@+id/answerCButton" android:layout_weight="1"/>
         <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/answerDButton"/>
+                android:layout_width="0dp"
+                android:layout_height="match_parent" android:id="@+id/answerDButton" android:layout_weight="1"/>
     </TableRow>
 </TableLayout>

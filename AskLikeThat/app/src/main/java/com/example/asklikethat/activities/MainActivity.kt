@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                     val sharedPreferences = getSharedPreferences("token", Context.MODE_PRIVATE)
                     val editor = sharedPreferences.edit().apply {
                         putString("token", result.token)
-                        putString("playerName", "Maciek")
+                        putString("playerName", currentAccount.login)
                     }
                     editor.apply()
             }}

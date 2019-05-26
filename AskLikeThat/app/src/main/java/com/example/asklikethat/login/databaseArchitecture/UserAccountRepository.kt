@@ -3,7 +3,6 @@ package com.example.asklikethat.login.databaseArchitecture
 import android.app.Application
 import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
-import android.support.annotation.WorkerThread
 
 /**
  * Repozytorium dla naszej bazy danych z kontami

@@ -24,6 +24,14 @@ class FirestoreHandler {
         )
     }
 
+    fun createPlayer(name: String, token: String) {
+        createDocumentInCollectionWithData(
+            "players",
+            name,
+            mapOf("name" to name, "token" to token)
+        )
+    }
+
     fun nextRoundInGame(game: OneVsOneGame, answerCorrect: Boolean) {
         if (game.nextToPlay.name == game.challenged.name) {
             game.nextToPlay = game.challenger

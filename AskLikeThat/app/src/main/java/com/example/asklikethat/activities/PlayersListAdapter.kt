@@ -28,9 +28,6 @@ class PlayersListAdapter(
             val playerNameTextView = itemView.playerNameTextView.apply {
                 text = player.name
             }
-            val lastOnlineGameTextView = itemView.lastOnlineTextView.apply {
-                text = player.lastOnlineGame.toDate().toString()
-            }
             itemView.setOnClickListener { clickListener(player) }
         }
     }

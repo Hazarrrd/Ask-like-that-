@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AskLikeThat</string>
+    <string name="app_name">Ask Like That</string>
     <string name="TRIVIA_API_URL">https://opentdb.com</string>
     <string name="end_rapid_game_result_text">Your score is %1$d ! You answered correctly to %2$d , incorrectly to %3$d
         and skipped %4$d questions!
@@ -23,4 +23,20 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="single_player">Single player</string>
+    <string name="rapid_mode">Rapid mode</string>
+    <string name="multiplayer">multiplayer</string>
+    <string name="ranking">Ranking</string>
+    <string name="on_music">ON music</string>
+    <string name="off_music">OFF music</string>
+    <string name="edit_account">Edit account</string>
+    <string name="find">find</string>
+    <string name="log_out">Log out</string>
+    <string name="find_player">find player</string>
+    <string name="new_game_label">New Game</string>
+    <string name="game_name">Game name</string>
+    <string name="number_of_questions">Number of questions</string>
+    <string name="opponent">Opponent</string>
+    <string name="create_game">Create game</string>
+    <string name="result_overview">Result overview</string>
 </resources>

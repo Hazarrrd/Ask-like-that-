@@ -2,6 +2,7 @@ package com.example.asklikethat.activities
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,9 @@ import com.example.asklikethat.datebase.DatabaseHandler
 import com.example.asklikethat.datebase.Record
 import com.example.asklikethat.login.databaseArchitecture.UserAccount
 import com.example.asklikethat.login.databaseArchitecture.UserAccountViewModel
+import com.example.asklikethat.watchingProfiles
+import kotlinx.android.synthetic.main.activity_edit_profile.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_single_player_end_game.*
 
 class EndGameFragment : Fragment() {

@@ -10,21 +10,6 @@ import android.widget.Button
 import com.example.asklikethat.R
 import kotlinx.android.synthetic.main.fragment_rapid_things.*
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [RapidThingsFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [RapidThingsFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class RapidThingsFragment : Fragment() {
 
     private var isClicked = false
@@ -66,10 +51,10 @@ class RapidThingsFragment : Fragment() {
     fun startTimer() {
         cTimer = object : CountDownTimer(10000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                textView2.setText("Time: " + millisUntilFinished / 1000)
+                textView2.text = "Time: " + millisUntilFinished / 1000
             }
             override fun onFinish() {
-                textView2.setText("Time: 0")
+                textView2.text = "Time: 0"
 
                 (activity as RapidGameActivity).handleEndGame()
             }

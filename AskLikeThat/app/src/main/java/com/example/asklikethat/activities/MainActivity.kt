@@ -2,6 +2,7 @@ package com.example.asklikethat.activities
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.media.MediaPlayer
@@ -20,6 +21,7 @@ import com.example.asklikethat.login.databaseArchitecture.UserAccount
 import com.example.asklikethat.login.databaseArchitecture.UserAccountViewModel
 
 
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,6 +40,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        FirebaseInstanceId.getInstance()
+            .instanceId
+            .addOnSuccessListener { result -> run {
+                    val sharedPreferences = getSharedPreferences("token", Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit().apply {
+                        putString("token", result.token)
+                        putString("playerName", currentAccount.login)
+                    }
+                    editor.apply()
+            }}
 
         dbHandler = DatabaseHandler(this)
         currentAccount = intent.getSerializableExtra("CURRENT_USER") as UserAccount
@@ -61,9 +73,6 @@ class MainActivity : AppCompatActivity() {
         }
         userAccountViewModel = ViewModelProviders.of(this).get(UserAccountViewModel::class.java)
         userAccountViewModel.allUserAccounts.observe(this, Observer<List<UserAccount>> {})
-        //if (success){
-          //  val toast = Toast.makeText(this,"Saved Successfully", Toast.LENGTH_LONG).show()
-        //}
     }
 
 
@@ -156,6 +165,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    fun startMultiplayer(view: View) {
+        val intent = Intent(applicationContext, BrowseGamesActivity::class.java)
+        startActivityForResult(intent, 55)
     }
 
     fun showRecords(view: View) {

@@ -4,12 +4,14 @@ import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.asklikethat.R
 import com.example.asklikethat.activities.MainActivity
+import com.example.asklikethat.firebase.FirestoreHandler
 import com.example.asklikethat.login.databaseArchitecture.UserAccount
 import com.example.asklikethat.login.databaseArchitecture.UserAccountViewModel
 import kotlinx.android.synthetic.main.activity_login.*
@@ -61,14 +63,15 @@ class LoginActivity : AppCompatActivity() {
             if(data == null){
                 Toast.makeText(applicationContext, "No data received from register activity", Toast.LENGTH_SHORT).show()
             }else{
-                val accountString = data.getStringExtra("NEW_ACCOUNT")
+                val accountString = data.getStringExtra("NEW_ACCOUNT").split(";-")
+                DoAsync { FirestoreHandler().createPlayer(accountString[0], "")}
                 userAccountViewModel.insert(
                     UserAccount(
-                        accountString.split(";-")[0],
-                        accountString.split(";-")[1],
-                        accountString.split(";-")[2],
-                        accountString.split(";-")[3],
-                        accountString.split(";-")[4],
+                        accountString[0],
+                        accountString[1],
+                        accountString[2],
+                        accountString[3],
+                        accountString[4],
                         null
                     ))
             }
@@ -84,5 +87,16 @@ class LoginActivity : AppCompatActivity() {
         val digest = MessageDigest.getInstance(algorithm)
         val bytes = digest.digest(this.toByteArray(Charsets.UTF_8))
         return bytes.fold("", { str, it -> str + "%02x".format(it) })
+    }
+
+    class DoAsync(val handler: () -> Unit) : AsyncTask<Void, Void, Void>() {
+        init {
+            execute()
+        }
+
+        override fun doInBackground(vararg params: Void?): Void? {
+            handler()
+            return null
+        }
     }
 }

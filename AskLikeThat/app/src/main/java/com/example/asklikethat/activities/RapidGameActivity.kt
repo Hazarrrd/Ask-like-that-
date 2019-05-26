@@ -8,6 +8,7 @@ import com.example.asklikethat.PointCounter
 import com.example.asklikethat.Question
 import com.example.asklikethat.R
 import com.example.asklikethat.login.databaseArchitecture.UserAccount
+import kotlinx.android.synthetic.main.fragment_rapid_things.*
 
 class RapidGameActivity : AppCompatActivity() {
     private var currentQuestionIndex = 0
@@ -16,6 +17,7 @@ class RapidGameActivity : AppCompatActivity() {
     private val player = Player("Player", "", 0)
     private val pointCounter = PointCounter(player)
     private val endGameRequestCode = 123
+
     private var failed = 0
     private var correct = 0
     private var block = false

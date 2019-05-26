@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
+    <uses-feature android:name="android.hardware.camera"
+                  android:required="false" />
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/alt_icon"
@@ -11,9 +14,9 @@
             android:roundIcon="@mipmap/alt_icon_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".editProfile">
+        <activity android:name=".activities.editProfileActivity">
         </activity>
-        <activity android:name=".watchingProfiles">
+        <activity android:name=".activities.watchingProfilesActivity">
         </activity>
         <activity android:name=".login.RegisterActivity">
         </activity>

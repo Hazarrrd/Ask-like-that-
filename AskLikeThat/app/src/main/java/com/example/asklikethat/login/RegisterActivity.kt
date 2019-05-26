@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.example.asklikethat.R
 import com.example.asklikethat.login.databaseArchitecture.UserAccount
 import kotlinx.android.synthetic.main.activity_register.*
+import java.security.MessageDigest
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var accounts: ArrayList<UserAccount>
@@ -26,7 +27,6 @@ class RegisterActivity : AppCompatActivity() {
 
     fun register(v: View){
         if(retUsername.text.toString().compareTo("") == 0 ||
-            retEmail.text.toString().compareTo("") == 0 ||
             retPassword.text.toString().compareTo("") == 0 ||
             retConfirmPassword.text.toString().compareTo(retPassword.text.toString()) != 0){
             Toast.makeText(applicationContext, "Incorrect Data", Toast.LENGTH_SHORT).show()
@@ -37,19 +37,30 @@ class RegisterActivity : AppCompatActivity() {
                     alreadyUsed = true
                     Toast.makeText(applicationContext, "Username already in use", Toast.LENGTH_SHORT).show()
                     break
-                }else if(account.email.compareTo(retEmail.text.toString()) == 0){
+                }/*else if(account.email.compareTo(retEmail.text.toString()) == 0){
                     alreadyUsed = true
                     Toast.makeText(applicationContext, "Email already in use", Toast.LENGTH_SHORT).show()
                     break
-                }
+                }*/
             }
             if(!alreadyUsed) {
-                val newAccount = String.format("%s;-%s;-%s;-%s;-%s", retUsername.text.toString(), retEmail.text.toString(), retPassword.text.toString()
+                val newAccount = String.format("%s;-%s;-%s;-%s;-%s", retUsername.text.toString(), "No email implemented", retPassword.text.toString().sha512()
                 ,"This user didn't write describtion", "0")
                 intent.putExtra("NEW_ACCOUNT", newAccount)
                 setResult(Activity.RESULT_OK, intent)
                 finish()
             }
         }
+    }
+
+    fun String.sha512(): String {
+        var toHash = this + "f1nd1ngn3m0"
+        return toHash.hashWithAlgorithm("SHA-512")
+    }
+
+    private fun String.hashWithAlgorithm(algorithm: String): String {
+        val digest = MessageDigest.getInstance(algorithm)
+        val bytes = digest.digest(this.toByteArray(Charsets.UTF_8))
+        return bytes.fold("", { str, it -> str + "%02x".format(it) })
     }
 }

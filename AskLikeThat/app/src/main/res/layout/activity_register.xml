@@ -23,12 +23,6 @@
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/retEmail" android:hint="Email address"/>
-        <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
                 android:id="@+id/retPassword" android:hint="Password"/>
@@ -50,7 +44,7 @@
             <Button
                     android:text="Register"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/rbtnRegister" android:layout_weight="1"
+                    android:layout_height="wrap_content" android:id="@+id/changePass" android:layout_weight="1"
                     android:onClick="register"/>
         </LinearLayout>
     </LinearLayout>

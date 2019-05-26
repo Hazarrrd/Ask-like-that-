@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".watchingProfiles">
+        tools:context=".activities.watchingProfilesActivity">
 
     <TextView
             android:text="TextView"
@@ -13,9 +13,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/describeView" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/pointsView"
-            app:layout_constraintVertical_bias="0.39"/>
+            app:layout_constraintTop_toBottomOf="@+id/backButton" android:layout_marginTop="32dp"/>
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp" android:id="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/describeView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:layout_marginTop="32dp" android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/pointsView"/>
     <TextView
             android:text="TextView"
             android:layout_width="wrap_content"
@@ -23,7 +29,7 @@
             android:id="@+id/pointsView" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="132dp"/>
+            android:layout_marginBottom="32dp"/>
     <Button
             android:text="back"
             android:layout_width="wrap_content"

@@ -15,6 +15,7 @@ import com.example.asklikethat.firebase.FirestoreHandler
 import com.example.asklikethat.login.databaseArchitecture.UserAccount
 import com.example.asklikethat.login.databaseArchitecture.UserAccountViewModel
 import kotlinx.android.synthetic.main.activity_login.*
+import java.security.MessageDigest
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var userAccountViewModel: UserAccountViewModel
@@ -34,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
         val allUserAccounts: ArrayList<UserAccount> = userAccountViewModel.allUserAccounts.value as ArrayList<UserAccount>
         for(account in allUserAccounts){
             if(account.login.compareTo(letUsername.text.toString()) == 0){
-                if(account.password.compareTo(letPassword.text.toString()) == 0){
+                if(account.password.compareTo(letPassword.text.toString().sha512()) == 0){
                     val intent: Intent = Intent(this, MainActivity::class.java).
                         putExtra("CURRENT_USER", account)
                     startActivity(intent)
@@ -70,10 +71,24 @@ class LoginActivity : AppCompatActivity() {
                         accountString[1],
                         accountString[2],
                         accountString[3],
-                        accountString[4]))
+                        accountString[4],
+                        null
+                    ))
             }
         }
     }
+
+    fun String.sha512(): String {
+        var toHash = this + "f1nd1ngn3m0"
+        return toHash.hashWithAlgorithm("SHA-512")
+    }
+
+    private fun String.hashWithAlgorithm(algorithm: String): String {
+        val digest = MessageDigest.getInstance(algorithm)
+        val bytes = digest.digest(this.toByteArray(Charsets.UTF_8))
+        return bytes.fold("", { str, it -> str + "%02x".format(it) })
+    }
+
     class DoAsync(val handler: () -> Unit) : AsyncTask<Void, Void, Void>() {
         init {
             execute()

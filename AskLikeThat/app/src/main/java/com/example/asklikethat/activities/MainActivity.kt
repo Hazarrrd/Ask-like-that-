@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.media.MediaPlayer
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -16,11 +17,8 @@ import com.example.asklikethat.api.Query
 import com.example.asklikethat.api.TriviaAPIService
 import com.example.asklikethat.api.TriviaDTO
 import com.example.asklikethat.datebase.DatabaseHandler
-import com.example.asklikethat.editProfile
 import com.example.asklikethat.login.databaseArchitecture.UserAccount
 import com.example.asklikethat.login.databaseArchitecture.UserAccountViewModel
-import com.example.asklikethat.watchingProfiles
-import kotlinx.android.synthetic.main.activity_login.*
 
 
 import com.google.firebase.iid.FirebaseInstanceId
@@ -28,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.ByteArrayOutputStream
 import java.io.IOException
 
 
@@ -72,10 +71,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
         userAccountViewModel = ViewModelProviders.of(this).get(UserAccountViewModel::class.java)
         userAccountViewModel.allUserAccounts.observe(this, Observer<List<UserAccount>> {})
     }
+
 
     fun logOut(v: View){
         mp.stop()
@@ -88,7 +87,7 @@ class MainActivity : AppCompatActivity() {
         for(account in allUserAccounts){
             if(account.login.compareTo(playerInput.text.toString()) == 0){
 
-                val intent: Intent = Intent(this, watchingProfiles::class.java).
+                val intent: Intent = Intent(this, watchingProfilesActivity::class.java).
                     putExtra("USER", account)
                 startActivity(intent)
                 broken = true
@@ -101,7 +100,9 @@ class MainActivity : AppCompatActivity() {
 
     fun edit(v: View){
 
-        val intent: Intent = Intent(this, editProfile::class.java).
+        updatePlayer()
+
+        val intent: Intent = Intent(this, editProfileActivity::class.java).
             putExtra("USER", currentAccount)
         startActivity(intent)
 
@@ -109,6 +110,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startSinglePlayer(view: View) {
+        updatePlayer()
         (view as Button).isClickable = false
         val service = TriviaAPIService()
         val query = Query()
@@ -137,6 +139,9 @@ class MainActivity : AppCompatActivity() {
 
 
     fun startRapid(view: View) {
+
+        updatePlayer()
+
         (view as Button).isClickable = false
         val service = TriviaAPIService()
         val query = Query()
@@ -170,5 +175,15 @@ class MainActivity : AppCompatActivity() {
     fun showRecords(view: View) {
         val intent = Intent(applicationContext, RankingActivity::class.java)
         startActivityForResult(intent, singlePlayerRequestCode)
+    }
+
+    fun updatePlayer() {
+        val allUserAccounts: ArrayList<UserAccount> = userAccountViewModel.allUserAccounts.value as ArrayList<UserAccount>
+        for(account in allUserAccounts){
+            if(account.login.compareTo(currentAccount.login) == 0){
+                currentAccount = account
+                break
+            }
+        }
     }
 }

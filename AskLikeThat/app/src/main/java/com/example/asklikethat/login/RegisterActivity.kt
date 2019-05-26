@@ -45,7 +45,7 @@ class RegisterActivity : AppCompatActivity() {
             }
             if(!alreadyUsed) {
                 val newAccount = String.format("%s;-%s;-%s;-%s;-%s", retUsername.text.toString(), "No email implemented", retPassword.text.toString().sha512()
-                ,"This user didn't write describtion", "0")
+                ,"This user didn't write description", "0")
                 intent.putExtra("NEW_ACCOUNT", newAccount)
                 setResult(Activity.RESULT_OK, intent)
                 finish()

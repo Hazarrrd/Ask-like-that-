@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         mp = MediaPlayer.create(this,R.raw.eminem1)
         mp.isLooping = true
-//        mp.start()
+        mp.start()
 
         music.setOnClickListener {
             if (mp.isPlaying) {
@@ -75,9 +75,6 @@ class MainActivity : AppCompatActivity() {
 
         userAccountViewModel = ViewModelProviders.of(this).get(UserAccountViewModel::class.java)
         userAccountViewModel.allUserAccounts.observe(this, Observer<List<UserAccount>> {})
-        //if (success){
-          //  val toast = Toast.makeText(this,"Saved Successfully", Toast.LENGTH_LONG).show()
-        //}
     }
 
     fun logOut(v: View){

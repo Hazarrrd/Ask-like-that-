@@ -4,8 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <uses-feature android:name="android.hardware.camera"
-                  android:required="false" />
+    <uses-feature
+            android:name="android.hardware.camera"
+            android:required="false"/>
 
     <application
             android:allowBackup="true"
@@ -14,15 +15,23 @@
             android:roundIcon="@mipmap/alt_icon_round"
             android:supportsRtl="true"
             android:theme="@style/HiddenTitleTheme">
-        <activity android:name=".activities.editProfileActivity"
-                  android:screenOrientation="portrait" >
+        <activity android:name=".activities.ChangeDescriptionActivity">
+        </activity>
+        <activity android:name=".activities.ChangeImageActivity">
+        </activity>
+        <activity android:name=".activities.ChangePasswordActivity">
+        </activity>
+        <activity
+                android:name=".activities.editProfileActivity"
+                android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activities.watchingProfilesActivity">
         </activity>
         <activity android:name=".activities.RegisterActivity">
         </activity>
-        <activity android:name=".activities.LoginActivity"
-                  android:screenOrientation="portrait">
+        <activity
+                android:name=".activities.LoginActivity"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -15,9 +15,11 @@
             android:roundIcon="@mipmap/alt_icon_round"
             android:supportsRtl="true"
             android:theme="@style/HiddenTitleTheme">
-        <activity android:name=".activities.ChangeDescriptionActivity">
+        <activity android:name=".activities.ChangeDescriptionActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".activities.ChangeImageActivity">
+        <activity android:name=".activities.ChangeImageActivity"
+                  android:screenOrientation="portrait">
         </activity>
         <activity android:name=".activities.ChangePasswordActivity">
         </activity>

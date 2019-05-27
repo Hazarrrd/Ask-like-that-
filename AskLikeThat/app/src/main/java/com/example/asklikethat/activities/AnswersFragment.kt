@@ -72,6 +72,7 @@ class AnswersFragment : Fragment() {
                         button.setBackgroundColor(Color.GREEN)
                     } else {
                         button.setBackgroundColor(Color.RED)
+                        buttons[0].setBackgroundColor(Color.GREEN)
                     }
                 }, 1000)
                 Handler().postDelayed({

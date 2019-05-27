@@ -16,6 +16,7 @@
             android:textColorHint="@color/white"
             tools:hint="describe your profile" android:id="@+id/editText"
             android:lines="3"
+            android:maxLength="250"
             android:gravity="top|left"
             android:maxLines="8"
             android:scrollbars="vertical"
